@@ -1,0 +1,27 @@
+public class Solution {
+    public int sqrt(int x) {
+        if(x < 2){
+            return x;
+        }
+        
+        long first = 1, last = x, mid = (first + last)/2, y = x;
+        while(first < last){
+            mid = (first + last)/2;
+            if(mid * mid <= y && (mid+1)*(mid+1) > y){
+                return (int)mid;
+            }
+            else if (mid * mid > y){
+                    last = mid;
+            }
+            else{
+                first = mid;
+            }
+        }
+        
+        
+        
+        
+        return (int)first;
+        
+    }
+}

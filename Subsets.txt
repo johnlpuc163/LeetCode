@@ -1,0 +1,32 @@
+public class Solution {
+    ArrayList<ArrayList<Integer>> retval = new ArrayList<ArrayList<Integer>>();
+    ArrayList<Integer> al = new ArrayList<Integer>();
+    public ArrayList<ArrayList<Integer>> subsets(int[] S) {
+        retval.add(al);
+        Arrays.sort(S);
+        subst(S, 0);
+        return retval;
+    }
+    
+    private void subst(int[] s, int index){
+        if(index > s.length-1){
+            return;
+        }
+        for (int i = index; i < s.length; i++){
+            al.add(new Integer(s[i]));
+            addToList();
+            subst(s,i+1);
+            al.remove(al.size()-1);
+        }
+    }
+    
+    private void addToList(){
+        ArrayList<Integer> newSet = new ArrayList<Integer>();
+        int temp;
+        for(Integer i: al){
+            temp = i;
+            newSet.add(new Integer(temp));
+        }
+        retval.add(newSet);
+    }
+}

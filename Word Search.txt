@@ -1,0 +1,41 @@
+public class Solution {
+    public boolean exist(char[][] board, String word) {
+        int row = board.length;
+        if(row == 0){
+            return false;
+        }
+        int column = board[0].length;
+        boolean flag[][] = new boolean[row][column];
+        for(int i = 0; i < row; i++){
+            for(int j = 0; j < column; j++){
+                if(match(board, word, 0, i, j, flag) == true){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    private boolean match(char[][] board, String word, int strIndex, int inX, int inY, boolean flag[][]){
+        if(board[inX][inY] != word.charAt(strIndex)){
+            return false;
+        }
+        else if(strIndex == word.length()-1){
+            return true;
+        }
+        flag[inX][inY] = true;
+        int row = board.length, column = board[0].length;
+        //initialize four directions
+        int x[] = {inX-1, inX+1, inX, inX};
+        int y[] = {inY, inY, inY+1, inY-1};
+        for(int i = 0; i < 4; i++){
+            if(x[i]>=0 && y[i] >=0 && x[i] < row && y[i] < column && flag[x[i]][y[i]] == false){
+                if(match(board, word, strIndex+1, x[i], y[i], flag) == true){
+                    return true;
+                }
+            }
+        }
+        flag[inX][inY] = false;
+        return false;
+    }
+}

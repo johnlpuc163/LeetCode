@@ -1,0 +1,49 @@
+public class Solution {
+    public String addBinary(String a, String b) {
+        if(a.equals("")){
+            return b;
+        }
+        if(b.equals("")){
+            return a;
+        }
+        
+        int al = a.length(), bl = b.length(), flag = 0, size = al>bl?al:bl;
+        char [] retc = new char[size];
+        char [] ca = a.toCharArray(), cb = b.toCharArray();
+        int ac, bc;
+        al--;
+        bl--;
+        while(size>0){
+            ac = al>=0? (ca[al--] - '0'):0;
+            bc = bl>=0? (cb[bl--] - '0'):0;
+            if(flag + ac + bc > 1){
+                
+                if(flag + ac + bc == 2){
+                    retc[size-1] = '0';
+                }
+                else{
+                    retc[size-1] = '1';
+                }
+                flag = 1;
+                size--;
+            }
+            else{
+                
+                if(ac == 0 && bc == 0&&flag == 0){
+                    retc[size-1] = '0';
+                }
+                else{
+                    retc[size-1] = '1';
+                }
+                flag = 0;
+                size--;
+            }
+        }
+       
+        String retval = new String(retc);
+        if(flag == 1){
+            retval = "1" + retval;
+        }
+        return retval;
+    }
+}
