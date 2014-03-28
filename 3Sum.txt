@@ -1,0 +1,43 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> threeSum(int[] num) {
+        ArrayList<ArrayList<Integer>> retval = new ArrayList<ArrayList<Integer>>();
+        if (num.length == 0)
+            return retval;
+        Arrays.sort(num);
+        for(int i = 0; i < num.length -2; i++){
+            int sumtwo = 0 - num[i];
+            int j = i + 1, k = num.length - 1;
+            while(j < k){
+                if(num[j] + num[k] < sumtwo){
+                    j++;
+                }
+                else if(num[j] + num[k] > sumtwo){
+                    k--;
+                }
+                else{
+                    ArrayList<Integer> newset = new ArrayList<Integer>();
+                    newset.add(num[i]);
+                    newset.add(num[j++]);
+                    newset.add(num[k--]);
+                    retval.add(newset);
+                }
+            }
+        }
+        for(int i = 0; i < retval.size() - 1; i++){
+            ArrayList<Integer> temp1 = retval.get(i);
+            int j = i + 1;
+            while(j < retval.size()){
+                ArrayList<Integer> temp2 = retval.get(j);
+                if(temp1.get(0) == temp2.get(0) && temp1.get(1) == temp2.get(1) && temp1.get(2) == temp2.get(2)){
+                    retval.remove(j);
+                }
+                else
+                    j++;
+            }
+        }
+        return retval;
+        
+    }
+    
+
+}

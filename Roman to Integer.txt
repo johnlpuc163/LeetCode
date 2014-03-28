@@ -1,0 +1,56 @@
+public class Solution {
+    public int romanToInt(String s) {
+        //I - 1, V - 5, X - 10, L - 50, C - 100, D - 500, M - 1000.
+        int curr = 0, sum = 0, length = s.length();
+        while(curr < length){
+            switch(s.charAt(curr)){
+                case 'M':
+                    sum = sum + 1000;
+                    curr ++;
+                    break;
+                case 'D':
+                    sum = sum + 500;
+                    curr ++;
+                    break;
+                case 'C':
+                    if(curr != length - 1 && (s.charAt(curr+1) == 'D' || s.charAt(curr+1) == 'M')){
+                        sum = sum - 100;
+                    }
+                    else{
+                        sum = sum + 100;
+                    }
+                    curr ++;
+                    break;
+                case 'L':
+                    sum = sum + 50;
+                    curr ++;
+                    break;
+                case 'X':
+                    if(curr != length - 1 && (s.charAt(curr+1) == 'L' || s.charAt(curr+1) == 'C')){
+                        sum = sum - 10;
+                    }
+                    else{
+                        sum = sum + 10;
+                    }
+                    curr ++;
+                    break;
+                case 'V':
+                    sum = sum + 5;
+                    curr ++;
+                    break;
+                case 'I':
+                    if(curr != length - 1 && (s.charAt(curr+1) == 'V' || s.charAt(curr+1) == 'X')){
+                        sum = sum - 1;
+                    }
+                    else{
+                        sum = sum + 1;
+                    }
+                    curr ++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return sum;
+    }
+}

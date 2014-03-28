@@ -1,0 +1,22 @@
+public class Solution {
+    public double pow(double x, int n) {
+        if(n == 1)
+            return x;
+        if(n == 0)
+            return 1;
+        int neg = 0;
+        if(n < 0){
+            neg = 1;
+            n = -n;
+        }
+        double temp = pow(x, n/2);
+        temp = temp*temp;
+        if (n%2 == 1){
+            temp = temp * x;
+        }
+        if(neg == 1){
+            temp = 1 / temp;
+        }
+        return temp;
+    }
+}

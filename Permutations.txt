@@ -1,0 +1,28 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> permute(int[] num) {
+        int[] flag = new int[num.length];
+        ArrayList<ArrayList<Integer>> output = new ArrayList<ArrayList<Integer>> ();
+        ArrayList<Integer> curr = new ArrayList<Integer>();
+        pm(flag, num, output, curr);
+        return output;
+    }
+    private void pm(int[] flag, int[]num, ArrayList<ArrayList<Integer>> output, ArrayList<Integer> curr){
+        if(curr.size() == num.length){
+            ArrayList<Integer> retval = new ArrayList<Integer>();
+            for(int i = 0; i < curr.size(); i++){
+                retval.add(curr.get(i));
+            }
+            output.add(retval);
+            return;
+        }
+        for(int i = 0; i < flag.length; i++){
+            if (flag[i] != 1){
+                curr.add(new Integer(num[i]));
+                flag[i] = 1;
+                pm(flag, num, output, curr);
+                flag[i] = 0;
+                curr.remove(curr.size()-1);
+            }
+        }
+    }
+}
